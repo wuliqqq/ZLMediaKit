@@ -572,7 +572,12 @@ file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/conf/config.ini" DESTINATION ${EXECUTABLE
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/default.pem" DESTINATION ${EXECUTABLE_OUTPUT_PATH})
 if (ENABLE_PYTHON)
   file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/python" DESTINATION ${EXECUTABLE_OUTPUT_PATH})
-  file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/python/StreamUI/frontend" DESTINATION "${EXECUTABLE_OUTPUT_PATH}/www/StreamUI")
+  file(GLOB FRONTEND_FILES
+          "${CMAKE_CURRENT_SOURCE_DIR}/python/StreamUI/frontend/*"
+  )
+  file(COPY ${FRONTEND_FILES}
+          DESTINATION "${EXECUTABLE_OUTPUT_PATH}/www/StreamUI/"
+  )
 endif ()
 
 # 拷贝VideoStack 无视频流时默认填充的背景图片
